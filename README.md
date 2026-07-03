@@ -1,2 +1,2 @@
-# tt_pills
+# Pill Puzzle (TBA)
 Pill Puzzle using jQuery
