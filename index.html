@@ -4,7 +4,7 @@
 		<title>Pill Puzzle</title>
 
 		<style>
-			div {outline: 1 px solid red;}
+			div {outline: 1px solid red;}
 
 			#topContainer
 			{
@@ -23,7 +23,7 @@
 			#scaleContainer
 			{
 			    display: grid;
-			    grid-template-columns: 3fr 1fr 1fr;
+			    grid-template-rows: 5fr 1fr 1fr;
 				gap: 0px;
 			}
 
@@ -43,7 +43,10 @@
 
 			.pill
 			{
-
+				font-family: sans-serif;
+				font-size: 1em;
+				color: rgba(0, 0, 0, 0.8);
+				text-align: center;
 			}
 
 			.topView
@@ -53,7 +56,11 @@
 
 			.sideView
 			{
-				
+				width: 100px;
+				height: 20px;
+				outline: 2px solid rgb(200, 200, 200);
+				border-radius: 5px;
+				background: linear-gradient(90deg, rgb(100, 100, 100), rgb(200, 200, 200), rgb(100, 100, 100));
 			}
 		</style>
 
@@ -64,13 +71,25 @@
 
 	<body>
 		<div id="topContainer">
-			<div class="pnlWeighPills">Left Pills</div>
+			<div class="pnlWeighPills">
+				<div class="pill sideView">1</div>
+				<div class="pill sideView">2</div>
+				<div class="pill sideView">3</div>
+				<div class="pill sideView">4</div>
+			</div>
+
 			<div id="scaleContainer">
 				<div>&#x2696;</div>
 				<div>Times</div>
 				<div>Weighbutton</div>
 			</div>
-			<div class="pnlWeighPills">Right Pills</div>
+
+			<div class="pnlWeighPills">
+				<div class="pill sideView">5</div>
+				<div class="pill sideView">6</div>
+				<div class="pill sideView">7</div>
+				<div class="pill sideView">8</div>
+			</div>
 		</div>
 
 		<div id="middleContainer">
