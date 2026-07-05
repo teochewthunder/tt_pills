@@ -1,25 +1,84 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
 		<title>Pill Puzzle</title>
+
+		<style>
+			div {outline: 1 px solid red;}
+
+			#topContainer
+			{
+				display: grid;
+				grid-template-columns: 1fr 2fr 1fr;
+				gap: 20px;
+			}
+
+			#middleContainer
+			{
+				display: grid;
+				grid-template-columns: 8fr 1fr;
+				gap: 20px;
+			}			
+
+			#scaleContainer
+			{
+			    display: grid;
+			    grid-template-columns: 3fr 1fr 1fr;
+				gap: 0px;
+			}
+
+			#pillsContainer
+			{
+			    display: grid;
+			    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1f;
+				gap: 0px;
+			}
+
+			.pnlWeighPills
+			{
+			    display: grid;
+			    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+				gap: 20px;
+			}	
+
+			.pill
+			{
+
+			}
+
+			.topView
+			{
+
+			}
+
+			.sideView
+			{
+				
+			}
+		</style>
+
+		<script>
+			
+		</script>
 	</head>
 
 	<body>
-		<div>
-			<div>Left Pills</div>
-			<div>
-				<div>Scale</div>
+		<div id="topContainer">
+			<div class="pnlWeighPills">Left Pills</div>
+			<div id="scaleContainer">
+				<div>&#x2696;</div>
 				<div>Times</div>
 				<div>Weighbutton</div>
 			</div>
-			<div>Right Pills</div>
+			<div class="pnlWeighPills">Right Pills</div>
 		</div>
-		<div>
-			<div>Pills</div>
+
+		<div id="middleContainer">
+			<div id="pillsContainer">Pills</div>
 			<div>Mouth</div>
 		</div>
-		<div>
+
+		<div id="bottomContainer">
 			Instructions
 			Restart
 		</div>
