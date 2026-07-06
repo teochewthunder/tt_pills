@@ -29,16 +29,14 @@
 
 			#pillsContainer
 			{
-			    display: grid;
-			    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1f;
-				gap: 0px;
+
 			}
 
 			.pnlWeighPills
 			{
 			    display: grid;
 			    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-				gap: 20px;
+				gap: 0px;
 			}	
 
 			.pill
@@ -51,16 +49,22 @@
 
 			.topView
 			{
-
+				width: 50px;
+				height: 50px;
+				outline: 2px solid rgb(200, 200, 200);
+				border-radius: 50%;
+				background: linear-gradient(45deg, rgb(100, 100, 100), rgb(200, 200, 200), rgb(100, 100, 100));
+				text-align: center;
+				float: left;
 			}
 
 			.sideView
 			{
-				width: 100px;
+				width: 50px;
 				height: 20px;
 				outline: 2px solid rgb(200, 200, 200);
-				border-radius: 5px;
 				background: linear-gradient(90deg, rgb(100, 100, 100), rgb(200, 200, 200), rgb(100, 100, 100));
+				margin: 0 auto 0 auto;
 			}
 		</style>
 
@@ -72,10 +76,14 @@
 	<body>
 		<div id="topContainer">
 			<div class="pnlWeighPills">
-				<div class="pill sideView">1</div>
-				<div class="pill sideView">2</div>
-				<div class="pill sideView">3</div>
-				<div class="pill sideView">4</div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div><div class="pill sideView">1</div></div>
+				<div><div class="pill sideView">2</div></div>
+				<div><div class="pill sideView">3</div></div>
+				<div><div class="pill sideView">4</div></div>
 			</div>
 
 			<div id="scaleContainer">
@@ -85,15 +93,28 @@
 			</div>
 
 			<div class="pnlWeighPills">
-				<div class="pill sideView">5</div>
-				<div class="pill sideView">6</div>
-				<div class="pill sideView">7</div>
-				<div class="pill sideView">8</div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div><div class="pill sideView">5</div></div>
+				<div><div class="pill sideView">6</div></div>
+				<div><div class="pill sideView">7</div></div>
+				<div><div class="pill sideView">8</div></div>
 			</div>
 		</div>
 
 		<div id="middleContainer">
-			<div id="pillsContainer">Pills</div>
+			<div id="pillsContainer">
+				<div class="pill topView">1</div>
+				<div class="pill topView">2</div>
+				<div class="pill topView">3</div>
+				<div class="pill topView">4</div>
+				<div class="pill topView">5</div>
+				<div class="pill topView">6</div>
+				<div class="pill topView">7</div>
+				<div class="pill topView">8</div>
+			</div>
 			<div>Mouth</div>
 		</div>
 
