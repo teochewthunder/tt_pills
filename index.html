@@ -4,13 +4,14 @@
 		<title>Pill Puzzle</title>
 
 		<style>
-			div {outline: 1px solid red;}
+			div {outline: 0px solid red;}
 
 			#topContainer
 			{
 				display: grid;
 				grid-template-columns: 1fr 2fr 1fr;
 				gap: 20px;
+				margin-bottom: 50px;
 			}
 
 			#middleContainer
@@ -18,6 +19,7 @@
 				display: grid;
 				grid-template-columns: 8fr 1fr;
 				gap: 20px;
+				margin-bottom: 50px;
 			}			
 
 			#scaleContainer
@@ -29,14 +31,15 @@
 
 			#pillsContainer
 			{
-
+			    display: grid;
+			    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 			}
 
 			.pnlWeighPills
 			{
 			    display: grid;
 			    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-				gap: 0px;
+				gap: 1px;
 			}	
 
 			.pill
@@ -50,12 +53,13 @@
 			.topView
 			{
 				width: 50px;
-				height: 50px;
+				height: 35px;
 				outline: 2px solid rgb(200, 200, 200);
 				border-radius: 50%;
-				background: linear-gradient(45deg, rgb(100, 100, 100), rgb(200, 200, 200), rgb(100, 100, 100));
+				background: linear-gradient(45deg, rgb(100, 100, 100), rgb(200, 200, 200));
 				text-align: center;
-				float: left;
+				margin: 0 auto 0 auto;
+				padding-top: 15px;
 			}
 
 			.sideView
@@ -106,14 +110,14 @@
 
 		<div id="middleContainer">
 			<div id="pillsContainer">
-				<div class="pill topView">1</div>
-				<div class="pill topView">2</div>
-				<div class="pill topView">3</div>
-				<div class="pill topView">4</div>
-				<div class="pill topView">5</div>
-				<div class="pill topView">6</div>
-				<div class="pill topView">7</div>
-				<div class="pill topView">8</div>
+				<div><div class="pill topView">1</div></div>
+				<div><div class="pill topView">2</div></div>
+				<div><div class="pill topView">3</div></div>
+				<div><div class="pill topView">4</div></div>
+				<div><div class="pill topView">5</div></div>
+				<div><div class="pill topView">6</div></div>
+				<div><div class="pill topView">7</div></div>
+				<div><div class="pill topView">8</div></div>
 			</div>
 			<div>Mouth</div>
 		</div>
