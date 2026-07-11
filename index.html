@@ -4,14 +4,23 @@
 		<title>Pill Puzzle</title>
 
 		<style>
-			div {outline: 1px solid red;}
+			body
+			{
+				font-size: 12px;
+				font-family: verdana;
+				text-align: center;
+				background-color:  rgb(0, 0, 0);
+				color: rgb(200, 200, 200);
+			}
+
+			div {outline: 0px solid red;}
 
 			#topContainer
 			{
 				display: grid;
 				grid-template-columns: 1fr 2fr 1fr;
 				gap: 20px;
-				width: 500px;
+				width: 400px;
 				margin: 0 auto 0 auto;
 			}
 
@@ -20,7 +29,7 @@
 				display: grid;
 				grid-template-columns: 8fr 1fr;
 				gap: 20px;
-				width: 500px;
+				width: 600px;
 				margin: 0 auto 0 auto;
 			}			
 
@@ -39,20 +48,27 @@
 
 			.pnlScale
 			{
-				text-align: center;
-				font-size: 10em;
+				font-size: 12em;
 			}
 
 			#pillsContainer
 			{
 			    display: grid;
 			    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+			    gap: 5px;
+			}
+
+			.pnlWeighPillsContainer
+			{
+			    display: flex;
+			    flex-direction: column;
+			    justify-content: center;
 			}
 
 			.pnlWeighPills
 			{
 			    display: grid;
-			    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+			    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 				gap: 1px;
 			}	
 
@@ -61,7 +77,6 @@
 				font-family: sans-serif;
 				font-size: 1em;
 				color: rgba(0, 0, 0, 0.8);
-				text-align: center;
 			}
 
 			.topView
@@ -89,7 +104,7 @@
 			{
 			    width: 60px;
 			    height: 20px;
-			    background-color: rgb(0, 0, 0);
+			    background-color: rgb(200, 200, 200);
 			    border-top: none;
 			    border-radius: 0 0 10px 10px;
 			    margin: 0 auto 0 auto;
@@ -108,37 +123,38 @@
 
 	<body>
 		<div id="topContainer">
-			<div class="pnlWeighPills">
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div><div class="pill sideView">1</div></div>
-				<div><div class="pill sideView">2</div></div>
-				<div><div class="pill sideView">3</div></div>
-				<div><div class="pill sideView">4</div></div>
-				<div><div class="bowl"></div></div>
+			<div id="pnlWeighPillsContainerLeft" class="pnlWeighPillsContainer">
+				<div class="pnlWeighPills">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div><div class="pill sideView">1</div></div>
+					<div><div class="pill sideView">2</div></div>
+					<div><div class="pill sideView">3</div></div>
+					<div><div class="pill sideView">4</div></div>
+					<div><div class="bowl"></div></div>
+				</div>				
 			</div>
 
 			<div id="scaleContainer">
 				<div class="pnlScale">&#x2696;</div>
-				<div>Times</div>
+				<div>Times Used: </div>
 				<div>Weighbutton</div>
 			</div>
 
-			<div class="pnlWeighPills">
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				
-				<div><div class="pill sideView">5</div></div>
-				<div><div class="pill sideView">6</div></div>
-				<div><div class="pill sideView">7</div></div>
-				<div><div class="pill sideView">8</div></div>
-				<div><div class="bowl"></div></div>
+			<div id="pnlWeighPillsContainerRight" class="pnlWeighPillsContainer">
+				<div class="pnlWeighPills">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div><div class="pill sideView">7</div></div>
+					<div><div class="pill sideView">8</div></div>
+					<div><div class="bowl"></div></div>
+				</div>				
 			</div>
 		</div>
 
@@ -161,8 +177,11 @@
 		<br />
 
 		<div id="bottomContainer">
-			Instructions
-			Restart
+			<p>You are slowly dying. There are eight pills. One of them is the cure. The rest are lethal poison and will kill you instantly. They are all identical in size and shape, and color. However, the cure is slightly lighter than the rest. You may use the scale exactly two times before it breaks.</p>
+
+			<p>Once you have decided which pill to take, select the pill and click on the face on the right. Good luck!</p>
+
+			<button id="btnStart">START</button>
 		</div>
 	</body>
 </html>
