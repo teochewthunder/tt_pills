@@ -117,6 +117,32 @@
 				gameStatus: false,
 				playerStates: {"ill":"&#9785;", "well":"&#9786;", "dead":"&#9760;"},
 				pills: [0, 0, 0, 0, 0, 0, 0, 0],
+				weighTimes: 0,
+				weighing: false,
+				weigh: function()
+				{
+					//determine which side heavier
+
+					//move columns
+				},
+				setWeightTimes: function(times)
+				{
+					// to times
+
+					//if 2, 'break' scale
+				},
+				setPlayerState: function(state)
+				{
+					//display state
+				},
+				start: function()
+				{
+
+				},
+				gameOver: function()
+				{
+
+				}
 			};
 		</script>
 	</head>
@@ -139,8 +165,8 @@
 
 			<div id="scaleContainer">
 				<div class="pnlScale">&#x2696;</div>
-				<div>Times Used: </div>
-				<div>Weighbutton</div>
+				<div>Times Used: <span id="pnlTimesUsed">0</span></div>
+				<div><button id="btnWeigh">WEIGH</button></div>
 			</div>
 
 			<div id="pnlWeighPillsContainerRight" class="pnlWeighPillsContainer">
