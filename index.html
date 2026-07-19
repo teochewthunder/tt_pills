@@ -143,13 +143,14 @@
 				weighing: false,
 				weigh: function()
 				{
+					setWeightTimes(this.weighTimes == 1 ? 2 : 1);  
 					//determine which side heavier
 
 					//move columns
 				},
 				setWeightTimes: function(times)
 				{
-					// to times
+					this.weighTimes = times;
 
 					//if 2, 'break' scale
 				},
@@ -162,24 +163,38 @@
 					this.gameStatus = true;
 					this.setPlayerState("ill");
 					this.setWeightTimes(0);
-					this.pills = [0, 0, 0, 1, 0, 0, 0, 0], //set at random
+
+					this.pills = [0, 0, 0, 0, 0, 0, 0, 0];
+					this.pills[Math.floor(Math.random() * 8)] = 1;
+
 					this.pills_middle: [0, 1, 2, 3, 4, 5, 6, 7];
 					this.pills_left = [];
 					this.pills_right = [];
 				},
-				deselectAllPills: function()
+				renderPills: function()
 				{
-
+					$("#pillsContainer div").html();
+					$("#pnlWeighPills_left div").html();
+					$("#pnlWeighPills_right div").html();
 				},
 				selectPill: function(index)
 				{
+					$(".pill").removeClass("selected");
 					this.pill_selected = index;
-					//search for pill in array
-					//set CSS class
-				}
+					var searchVal = index + 1;
+
+					$(".pill").filter
+					(
+						function () 
+						{
+    						return $(this).text().trim() == searchVal;
+						}
+					)
+					.addClass("selected");
+				},
 				gameOver: function()
 				{
-
+					this.gameStatus = false;
 				}
 			};
 		</script>
@@ -188,7 +203,7 @@
 	<body>
 		<div id="topContainer">
 			<div id="pnlWeighPillsContainerLeft" class="pnlWeighPillsContainer">
-				<div class="pnlWeighPills">
+				<div class="pnlWeighPills" id="pnlWeighPills_left">
 					<div></div>
 					<div></div>
 					<div></div>
@@ -208,7 +223,7 @@
 			</div>
 
 			<div id="pnlWeighPillsContainerRight" class="pnlWeighPillsContainer">
-				<div class="pnlWeighPills">
+				<div class="pnlWeighPills" id="pnlWeighPills_right">
 					<div></div>
 					<div></div>
 					<div></div>
