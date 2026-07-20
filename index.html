@@ -13,7 +13,7 @@
 				color: rgb(200, 200, 200);
 			}
 
-			div {outline: 0px solid red;}
+			div {outline: 1px solid red;}
 
 			#topContainer
 			{
@@ -135,7 +135,7 @@
 				playerStatus: "ill",
 				playerStates: {"ill":"&#9785;", "well":"&#9786;", "dead":"&#9760;"},
 				pill_selected: -1,
-				pills: [0, 0, 0, 0, 0, 0, 0, 0],
+				pills: [10, 10, 10, 10, 10, 10, 10, 10],
 				pills_middle: [0, 1, 2, 3, 4, 5, 6, 7],
 				pills_left: [],
 				pills_right: [],
@@ -164,7 +164,7 @@
 					this.setPlayerState("ill");
 					this.setWeightTimes(0);
 
-					this.pills = [0, 0, 0, 0, 0, 0, 0, 0];
+					this.pills = [10, 10, 10, 10, 10, 10, 10, 10];
 					this.pills[Math.floor(Math.random() * 8)] = 1;
 
 					this.pills_middle = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -174,22 +174,21 @@
 				},
 				renderPills: function()
 				{
-					$("#pillsContainer div").html("");
-					$("#pnlWeighPills_left div").html("");
-					$("#pnlWeighPills_right div").html("");
+					$(".pillSlot").html("");
 
 					var starting_index = 0;
 
-					starting_index = (7 - this.pills_left.length);
+					starting_index = (8 - this.pills_left.length);
 					this.pills_left.forEach
 					(
 						(x, i) => 
 						{
 						    const pill = $("<div></div>");
-						    pill.addClass("pill topView");
+						    pill.addClass("pill sideView");
 						    pill.text(x + 1);
+						    const slot = $("#pnlWeighPills_left .pillSlot")[starting_index + i];
 
-						    S($("#pnlWeighPills_left div")[starting_index]).append(pill);
+						    $(slot).append(pill);
 						}
 					);
 				},
@@ -220,14 +219,14 @@
 		<div id="topContainer">
 			<div id="pnlWeighPillsContainerLeft" class="pnlWeighPillsContainer">
 				<div class="pnlWeighPills" id="pnlWeighPills_left">
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
 					<div><div class="bowl"></div></div>
 				</div>				
 			</div>
@@ -240,14 +239,14 @@
 
 			<div id="pnlWeighPillsContainerRight" class="pnlWeighPillsContainer">
 				<div class="pnlWeighPills" id="pnlWeighPills_right">
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div><div class="pill sideView">7</div></div>
-					<div><div class="pill sideView">8</div></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"><div class="pill sideView">7</div></div>
+					<div class="pillSlot"><div class="pill sideView">8</div></div>
 					<div><div class="bowl"></div></div>
 				</div>				
 			</div>
@@ -257,14 +256,14 @@
 
 		<div id="middleContainer">
 			<div id="pillsContainer">
-				<div><div class="pill topView selected">1</div></div>
-				<div><div class="pill topView">2</div></div>
-				<div><div class="pill topView">3</div></div>
-				<div><div class="pill topView">4</div></div>
-				<div><div class="pill topView">5</div></div>
-				<div><div class="pill topView">6</div></div>
-				<div><div class="pill topView">7</div></div>
-				<div><div class="pill topView">8</div></div>
+				<div class="pillSlot"><div class="pill topView selected">1</div></div>
+				<div class="pillSlot"><div class="pill topView">2</div></div>
+				<div class="pillSlot"><div class="pill topView">3</div></div>
+				<div class="pillSlot"><div class="pill topView">4</div></div>
+				<div class="pillSlot"><div class="pill topView">5</div></div>
+				<div class="pillSlot"><div class="pill topView">6</div></div>
+				<div class="pillSlot"><div class="pill topView">7</div></div>
+				<div class="pillSlot"><div class="pill topView">8</div></div>
 			</div>
 			<br />
 			<div id="playerContainer">&#9785;</div>
