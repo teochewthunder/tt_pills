@@ -129,14 +129,14 @@
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 		<script>
-			let pills = 
+			let pillgame = 
 			{
 				gameStatus: false,
 				playerStatus: "ill",
 				playerStates: {"ill":"&#9785;", "well":"&#9786;", "dead":"&#9760;"},
 				pill_selected: -1,
 				pills: [0, 0, 0, 0, 0, 0, 0, 0],
-				pills_middle: [0, 1, 2, 3, 4, 5, 6, 7]
+				pills_middle: [0, 1, 2, 3, 4, 5, 6, 7],
 				pills_left: [],
 				pills_right: [],
 				weighTimes: 0,
@@ -167,15 +167,31 @@
 					this.pills = [0, 0, 0, 0, 0, 0, 0, 0];
 					this.pills[Math.floor(Math.random() * 8)] = 1;
 
-					this.pills_middle: [0, 1, 2, 3, 4, 5, 6, 7];
-					this.pills_left = [];
+					this.pills_middle = [0, 1, 2, 3, 4, 5, 6, 7];
+					this.pills_left = [0, 2, 5];
 					this.pills_right = [];
+					this.renderPills();
 				},
 				renderPills: function()
 				{
-					$("#pillsContainer div").html();
-					$("#pnlWeighPills_left div").html();
-					$("#pnlWeighPills_right div").html();
+					$("#pillsContainer div").html("");
+					$("#pnlWeighPills_left div").html("");
+					$("#pnlWeighPills_right div").html("");
+
+					var starting_index = 0;
+
+					starting_index = (7 - this.pills_left.length);
+					this.pills_left.forEach
+					(
+						(x, i) => 
+						{
+						    const pill = $("<div></div>");
+						    pill.addClass("pill topView");
+						    pill.text(x + 1);
+
+						    S($("#pnlWeighPills_left div")[starting_index]).append(pill);
+						}
+					);
 				},
 				selectPill: function(index)
 				{
@@ -208,10 +224,10 @@
 					<div></div>
 					<div></div>
 					<div></div>
-					<div><div class="pill sideView">1</div></div>
-					<div><div class="pill sideView">2</div></div>
-					<div><div class="pill sideView">3</div></div>
-					<div><div class="pill sideView">4</div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
 					<div><div class="bowl"></div></div>
 				</div>				
 			</div>
@@ -261,7 +277,7 @@
 
 			<p>Once you have decided which pill to take, select the pill and click on the face on the right. Good luck!</p>
 
-			<button id="btnStart">START</button>
+			<button id="btnStart" onclick="pillgame.start()">START</button>
 		</div>
 	</body>
 </html>
