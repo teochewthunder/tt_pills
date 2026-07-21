@@ -144,9 +144,28 @@
 				weigh: function()
 				{
 					setWeightTimes(this.weighTimes == 1 ? 2 : 1);  
-					//determine which side heavier
+					const leftWeight = pills_left
+				    .map((x) => pills[x])
+				    .reduce((sum, weight) => sum + weight, 0);
 
-					//move columns
+					const rightWeight = pills_left
+				    .map((x) => pills[x])
+				    .reduce((sum, weight) => sum + weight, 0);
+
+				    if (leftWeight == rightWeight)
+				    {
+				    	return;
+				    }
+
+				    if (leftWeight < rightWeight)
+				    {
+				    	return;
+				    }
+
+				    if (leftWeight < rightWeight)
+				    {
+				    	return;
+				    }
 				},
 				setWeightTimes: function(times)
 				{
@@ -156,7 +175,8 @@
 				},
 				setPlayerState: function(state)
 				{
-					//display state
+					this.playerStatus = state;
+					$("#playerContainer").html(this.playerStates[state]);
 				},
 				start: function()
 				{
@@ -187,6 +207,20 @@
 						    pill.addClass("pill sideView");
 						    pill.text(x + 1);
 						    const slot = $("#pnlWeighPills_left .pillSlot")[starting_index + i];
+
+						    $(slot).append(pill);
+						}
+					);
+
+					starting_index = (8 - this.pills_right.length);
+					this.pills_right.forEach
+					(
+						(x, i) => 
+						{
+						    const pill = $("<div></div>");
+						    pill.addClass("pill sideView");
+						    pill.text(x + 1);
+						    const slot = $("#pnlWeighPills_right .pillSlot")[starting_index + i];
 
 						    $(slot).append(pill);
 						}
