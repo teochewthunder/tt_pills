@@ -206,6 +206,9 @@
 						    const pill = $("<div></div>");
 						    pill.addClass("pill sideView");
 						    pill.text(x + 1);
+						    pill.on("click", () => {
+							    this.selectPill(x);
+							});
 						    const slot = $("#pnlWeighPills_left .pillSlot")[starting_index + i];
 
 						    $(slot).append(pill);
@@ -220,7 +223,26 @@
 						    const pill = $("<div></div>");
 						    pill.addClass("pill sideView");
 						    pill.text(x + 1);
+						    pill.on("click", () => {
+							    this.selectPill(x);
+							});
 						    const slot = $("#pnlWeighPills_right .pillSlot")[starting_index + i];
+
+						    $(slot).append(pill);
+						}
+					);
+
+					this.pills_middle.forEach
+					(
+						(x, i) => 
+						{
+						    const pill = $("<div></div>");
+						    pill.addClass("pill topView");
+						    pill.text(x + 1);
+						    pill.on("click", () => {
+							    this.selectPill(x);
+							});
+						    const slot = $("#pillsContainer .pillSlot")[i];
 
 						    $(slot).append(pill);
 						}
@@ -240,6 +262,14 @@
 						}
 					)
 					.addClass("selected");
+				},
+				placePill: function(index, slot)
+				{
+					this.pill_selected = -1;
+					if (slot == "left") this.pills_left.unshift(index);
+					if (slot == "right") this.pills_left.unshift(index);
+					if (slot == "middle") this.pills_middle.push(index);
+					this.renderPills();
 				},
 				gameOver: function()
 				{
@@ -279,8 +309,8 @@
 					<div class="pillSlot"></div>
 					<div class="pillSlot"></div>
 					<div class="pillSlot"></div>
-					<div class="pillSlot"><div class="pill sideView">7</div></div>
-					<div class="pillSlot"><div class="pill sideView">8</div></div>
+					<div class="pillSlot"></div>
+					<div class="pillSlot"></div>
 					<div><div class="bowl"></div></div>
 				</div>				
 			</div>
@@ -290,14 +320,14 @@
 
 		<div id="middleContainer">
 			<div id="pillsContainer">
-				<div class="pillSlot"><div class="pill topView selected">1</div></div>
-				<div class="pillSlot"><div class="pill topView">2</div></div>
-				<div class="pillSlot"><div class="pill topView">3</div></div>
-				<div class="pillSlot"><div class="pill topView">4</div></div>
-				<div class="pillSlot"><div class="pill topView">5</div></div>
-				<div class="pillSlot"><div class="pill topView">6</div></div>
-				<div class="pillSlot"><div class="pill topView">7</div></div>
-				<div class="pillSlot"><div class="pill topView">8</div></div>
+				<div class="pillSlot"></div>
+				<div class="pillSlot"></div>
+				<div class="pillSlot"></div>
+				<div class="pillSlot"></div>
+				<div class="pillSlot"></div>
+				<div class="pillSlot"></div>
+				<div class="pillSlot"></div>
+				<div class="pillSlot"></div>
 			</div>
 			<br />
 			<div id="playerContainer">&#9785;</div>
