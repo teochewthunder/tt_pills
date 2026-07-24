@@ -28,7 +28,6 @@
 			{
 				width: 600px;
 				margin: 0 auto 0 auto;
-				cursor: pointer;
 			}			
 
 			#bottomContainer
@@ -65,6 +64,11 @@
 			#pillsContainer div.selected
 			{
 			    color: rgb(255, 0, 0);
+			}
+
+			.pillSlot
+			{
+				cursor: pointer;
 			}
 
 			#playerContainer
@@ -188,7 +192,7 @@
 					this.pills[Math.floor(Math.random() * 8)] = 1;
 
 					this.pills_middle = [0, 1, 2, 3, 4, 5, 6, 7];
-					this.pills_left = [0, 2, 5];
+					this.pills_left = [];
 					this.pills_right = [];
 					this.renderPills();
 				},
@@ -263,13 +267,34 @@
 					)
 					.addClass("selected");
 				},
-				placePill: function(index, slot)
-				{
+				placePill: function(slot)
+				{alert(slot + this.pill_selected);
+					if (this.pill_selected == -1)
+					{
+						if (slot == "left" && this.pills_left.length > 0) 
+						{
+							this.pill_selected = this.pills_left[0];
+							this.pills_left.shift();
+						}
+
+						if (slot == "right" && this.pills_right.length > 0) 
+						{
+							this.pill_selected = this.pills_right[0];
+							this.pills_right.shift();
+						}
+
+						this.placePill("middle");
+
+						return; 
+					}
+
+					if (slot == "left") this.pills_left.unshift(this.pill_selected);
+					if (slot == "right") this.pills_left.unshift(this.pill_selected);
+					if (slot == "middle") this.pills_middle.push(this.pill_selected);
 					this.pill_selected = -1;
-					if (slot == "left") this.pills_left.unshift(index);
-					if (slot == "right") this.pills_left.unshift(index);
-					if (slot == "middle") this.pills_middle.push(index);
 					this.renderPills();
+
+					return;
 				},
 				gameOver: function()
 				{
@@ -282,7 +307,7 @@
 	<body>
 		<div id="topContainer">
 			<div id="pnlWeighPillsContainerLeft" class="pnlWeighPillsContainer">
-				<div class="pnlWeighPills" id="pnlWeighPills_left">
+				<div class="pnlWeighPills" id="pnlWeighPills_left" onclick="pillgame.placePill('left')">
 					<div class="pillSlot"></div>
 					<div class="pillSlot"></div>
 					<div class="pillSlot"></div>
