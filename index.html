@@ -210,9 +210,6 @@
 						    const pill = $("<div></div>");
 						    pill.addClass("pill sideView");
 						    pill.text(x + 1);
-						    pill.on("click", () => {
-							    this.selectPill(x);
-							});
 						    const slot = $("#pnlWeighPills_left .pillSlot")[starting_index + i];
 
 						    $(slot).append(pill);
@@ -227,9 +224,6 @@
 						    const pill = $("<div></div>");
 						    pill.addClass("pill sideView");
 						    pill.text(x + 1);
-						    pill.on("click", () => {
-							    this.selectPill(x);
-							});
 						    const slot = $("#pnlWeighPills_right .pillSlot")[starting_index + i];
 
 						    $(slot).append(pill);
@@ -268,7 +262,7 @@
 					.addClass("selected");
 				},
 				placePill: function(slot)
-				{alert(slot + this.pill_selected);
+				{
 					if (this.pill_selected == -1)
 					{
 						if (slot == "left" && this.pills_left.length > 0) 
@@ -283,17 +277,30 @@
 							this.pills_right.shift();
 						}
 
-						this.placePill("middle");
+						this.returnPill();
+						this.renderPills();
 
 						return; 
 					}
 
 					if (slot == "left") this.pills_left.unshift(this.pill_selected);
-					if (slot == "right") this.pills_left.unshift(this.pill_selected);
-					if (slot == "middle") this.pills_middle.push(this.pill_selected);
+					if (slot == "right") this.pills_right.unshift(this.pill_selected);
+
+					const index = this.pills_middle.indexOf(this.pill_selected);
+
+					if (index !== -1) {
+					    this.pills_middle.splice(index, 1);
+					}
+
 					this.pill_selected = -1;
 					this.renderPills();
 
+					return;
+				},
+				returnPill()
+				{
+					this.pills_middle.push(this.pill_selected);
+					this.pill_selected = -1;
 					return;
 				},
 				gameOver: function()
@@ -327,7 +334,7 @@
 			</div>
 
 			<div id="pnlWeighPillsContainerRight" class="pnlWeighPillsContainer">
-				<div class="pnlWeighPills" id="pnlWeighPills_right">
+				<div class="pnlWeighPills" id="pnlWeighPills_right" onclick="pillgame.placePill('right')">
 					<div class="pillSlot"></div>
 					<div class="pillSlot"></div>
 					<div class="pillSlot"></div>
