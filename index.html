@@ -74,6 +74,7 @@
 			#playerContainer
 			{
 				font-size: 7em;
+				cursor: pointer;
 			}
 
 			.pnlWeighPillsContainer
@@ -128,6 +129,11 @@
 			    border-radius: 0 0 10px 10px;
 			    margin: 0 auto 0 auto;
 			}
+
+			#btnWeigh
+			{
+				display: none;
+			}
 		</style>
 
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -135,7 +141,6 @@
 		<script>
 			let pillgame = 
 			{
-				gameStatus: false,
 				playerStatus: "ill",
 				playerStates: {"ill":"&#9785;", "well":"&#9786;", "dead":"&#9760;"},
 				pill_selected: -1,
@@ -147,35 +152,42 @@
 				weighing: false,
 				weigh: function()
 				{
-					setWeightTimes(this.weighTimes == 1 ? 2 : 1);  
-					const leftWeight = pills_left
-				    .map((x) => pills[x])
+					this.setWeightTimes(this.weighTimes == 1 ? 2 : 1);  
+					const leftWeight = this.pills_left
+				    .map((x) => this.pills[x])
 				    .reduce((sum, weight) => sum + weight, 0);
 
-					const rightWeight = pills_left
-				    .map((x) => pills[x])
+					const rightWeight = this.pills_right
+				    .map((x) => this.pills[x])
 				    .reduce((sum, weight) => sum + weight, 0);
 
 				    if (leftWeight == rightWeight)
 				    {
+				    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "center");
+				    	$("#pnlWeighPillsContainerRight").css("justifyContent", "center");
+				    	return;
+				    }
+
+				    if (leftWeight > rightWeight)
+				    {
+				    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "flex-end");
+				    	$("#pnlWeighPillsContainerRight").css("justifyContent", "flex-start");
 				    	return;
 				    }
 
 				    if (leftWeight < rightWeight)
 				    {
-				    	return;
-				    }
-
-				    if (leftWeight < rightWeight)
-				    {
+				    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "flex-start");
+				    	$("#pnlWeighPillsContainerRight").css("justifyContent", "flex-end");
 				    	return;
 				    }
 				},
 				setWeightTimes: function(times)
 				{
 					this.weighTimes = times;
+					if (times == 2) $("#btnWeigh").hide();
 
-					//if 2, 'break' scale
+					return;
 				},
 				setPlayerState: function(state)
 				{
@@ -184,9 +196,10 @@
 				},
 				start: function()
 				{
-					this.gameStatus = true;
 					this.setPlayerState("ill");
 					this.setWeightTimes(0);
+					$("#btnWeigh").show();
+					$("#btnStart").html("RESTART");
 
 					this.pills = [10, 10, 10, 10, 10, 10, 10, 10];
 					this.pills[Math.floor(Math.random() * 8)] = 1;
@@ -269,18 +282,27 @@
 						{
 							this.pill_selected = this.pills_left[0];
 							this.pills_left.shift();
+							this.returnPill();
+							this.renderPills();
 						}
 
 						if (slot == "right" && this.pills_right.length > 0) 
 						{
 							this.pill_selected = this.pills_right[0];
 							this.pills_right.shift();
+							this.returnPill();
+							this.renderPills();
 						}
 
-						this.returnPill();
-						this.renderPills();
-
 						return; 
+					}
+
+					if (slot == "mouth") 
+					{
+						if (this.pills[this.pill_selected] == 1) this.setPlayerState("well");
+						if (this.pills[this.pill_selected] == 10) this.setPlayerState("dead");
+						this.gameOver();
+						return;
 					}
 
 					if (slot == "left") this.pills_left.unshift(this.pill_selected);
@@ -305,7 +327,12 @@
 				},
 				gameOver: function()
 				{
-					this.gameStatus = false;
+					$("#btnWeigh").hide();
+
+					this.pills_middle = [];
+					this.pills_left = [];
+					this.pills_right = [];
+					this.renderPills();
 				}
 			};
 		</script>
@@ -330,7 +357,7 @@
 			<div id="scaleContainer">
 				<div class="pnlScale">&#x2696;</div>
 				<div>Times Used: <span id="pnlTimesUsed">0</span></div>
-				<div><button id="btnWeigh">WEIGH</button></div>
+				<div><button id="btnWeigh" onclick="pillgame.weigh()">WEIGH</button></div>
 			</div>
 
 			<div id="pnlWeighPillsContainerRight" class="pnlWeighPillsContainer">
@@ -362,7 +389,7 @@
 				<div class="pillSlot"></div>
 			</div>
 			<br />
-			<div id="playerContainer">&#9785;</div>
+			<div id="playerContainer" onclick="pillgame.placePill('mouth')"></div>
 		</div>
 
 		<br />
