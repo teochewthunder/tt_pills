@@ -165,6 +165,7 @@
 				    {
 				    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "center");
 				    	$("#pnlWeighPillsContainerRight").css("justifyContent", "center");
+
 				    	return;
 				    }
 
@@ -172,6 +173,7 @@
 				    {
 				    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "flex-end");
 				    	$("#pnlWeighPillsContainerRight").css("justifyContent", "flex-start");
+
 				    	return;
 				    }
 
@@ -179,6 +181,7 @@
 				    {
 				    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "flex-start");
 				    	$("#pnlWeighPillsContainerRight").css("justifyContent", "flex-end");
+				    	
 				    	return;
 				    }
 				},
@@ -193,6 +196,8 @@
 				{
 					this.playerStatus = state;
 					$("#playerContainer").html(this.playerStates[state]);
+
+					return;
 				},
 				start: function()
 				{
@@ -200,6 +205,8 @@
 					this.setWeightTimes(0);
 					$("#btnWeigh").show();
 					$("#btnStart").html("RESTART");
+			    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "center");
+			    	$("#pnlWeighPillsContainerRight").css("justifyContent", "center");
 
 					this.pills = [10, 10, 10, 10, 10, 10, 10, 10];
 					this.pills[Math.floor(Math.random() * 8)] = 1;
@@ -208,6 +215,8 @@
 					this.pills_left = [];
 					this.pills_right = [];
 					this.renderPills();
+
+					return;
 				},
 				renderPills: function()
 				{
@@ -258,6 +267,8 @@
 						    $(slot).append(pill);
 						}
 					);
+
+					return;
 				},
 				selectPill: function(index)
 				{
@@ -273,6 +284,8 @@
 						}
 					)
 					.addClass("selected");
+
+					return;
 				},
 				placePill: function(slot)
 				{
@@ -302,6 +315,7 @@
 						if (this.pills[this.pill_selected] == 1) this.setPlayerState("well");
 						if (this.pills[this.pill_selected] == 10) this.setPlayerState("dead");
 						this.gameOver();
+
 						return;
 					}
 
@@ -310,9 +324,7 @@
 
 					const index = this.pills_middle.indexOf(this.pill_selected);
 
-					if (index !== -1) {
-					    this.pills_middle.splice(index, 1);
-					}
+					if (index !== -1)  this.pills_middle.splice(index, 1);
 
 					this.pill_selected = -1;
 					this.renderPills();
@@ -323,16 +335,20 @@
 				{
 					this.pills_middle.push(this.pill_selected);
 					this.pill_selected = -1;
+
 					return;
 				},
 				gameOver: function()
 				{
 					$("#btnWeigh").hide();
-
+			    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "center");
+			    	$("#pnlWeighPillsContainerRight").css("justifyContent", "center");
 					this.pills_middle = [];
 					this.pills_left = [];
 					this.pills_right = [];
 					this.renderPills();
+
+					return;
 				}
 			};
 		</script>
