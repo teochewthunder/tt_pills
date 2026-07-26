@@ -256,6 +256,7 @@
 					this.pills_left = [];
 					this.pills_right = [];
 					this.renderPills();
+					this.pill_selected = -1;
 
 					return;
 				},
@@ -331,7 +332,7 @@
 				placePill: function(slot)
 				{
 					if (this.playerStatus != "ill") return;
-					
+
 					if (this.pill_selected == -1)
 					{
 						if (slot == "left" && this.pills_left.length > 0) 
