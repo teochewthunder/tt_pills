@@ -13,7 +13,7 @@
 				color: rgb(200, 200, 200);
 			}
 
-			div {outline: 1px solid red;}
+			div {outline: 0px solid red;}
 
 			#topContainer
 			{
@@ -71,10 +71,15 @@
 				cursor: pointer;
 			}
 
-			#playerContainer
+			#playerFace
 			{
 				font-size: 7em;
 				cursor: pointer;
+			}
+
+			#playerMessage
+			{
+				font-size: 3em;
 			}
 
 			.pnlWeighPillsContainer
@@ -132,7 +137,18 @@
 
 			#btnWeigh
 			{
+				width: 5em;
+				height: 2em;
+				border-radius: 3px;
 				display: none;
+			}
+
+			#btnStart
+			{
+				width: 10em;
+				height: 3em;
+				border-radius: 3px;				
+				font-size: 2em;
 			}
 		</style>
 
@@ -142,7 +158,27 @@
 			let pillgame = 
 			{
 				playerStatus: "ill",
-				playerStates: {"ill":"&#9785;", "well":"&#9786;", "dead":"&#9760;"},
+				playerStates: 
+				{
+					"ill": 
+					{
+						"face": "&#9785;", 
+						"color": "#004400",
+						"message": "Slowly dying..."
+					},
+					"well": 
+					{
+						"face": "&#9786;", 
+						"color": "#FFFF00",
+						"message": "Cured! Congratulations!"
+					},
+					"dead": 
+					{
+						"face": "&#9760;", 
+						"color": "#404040",
+						"message": "Dead. Too bad!"
+					},
+				},
 				pill_selected: -1,
 				pills: [10, 10, 10, 10, 10, 10, 10, 10],
 				pills_middle: [0, 1, 2, 3, 4, 5, 6, 7],
@@ -152,7 +188,9 @@
 				weighing: false,
 				weigh: function()
 				{
-					this.setWeightTimes(this.weighTimes == 1 ? 2 : 1);  
+					if (this.playerStatus != "ill") return;
+
+					this.setWeightTimes(this.weighTimes + 1);  
 					const leftWeight = this.pills_left
 				    .map((x) => this.pills[x])
 				    .reduce((sum, weight) => sum + weight, 0);
@@ -163,8 +201,8 @@
 
 				    if (leftWeight == rightWeight)
 				    {
-				    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "center");
-				    	$("#pnlWeighPillsContainerRight").css("justifyContent", "center");
+				    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "flex-end");
+				    	$("#pnlWeighPillsContainerRight").css("justifyContent", "flex-end");
 
 				    	return;
 				    }
@@ -181,13 +219,14 @@
 				    {
 				    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "flex-start");
 				    	$("#pnlWeighPillsContainerRight").css("justifyContent", "flex-end");
-				    	
+
 				    	return;
 				    }
 				},
 				setWeightTimes: function(times)
 				{
 					this.weighTimes = times;
+					$("#pnlTimesUsed").text(times);
 					if (times == 2) $("#btnWeigh").hide();
 
 					return;
@@ -195,7 +234,9 @@
 				setPlayerState: function(state)
 				{
 					this.playerStatus = state;
-					$("#playerContainer").html(this.playerStates[state]);
+					$("#playerFace").html(this.playerStates[state].face);
+					$("#playerFace").css("color", this.playerStates[state].color);
+					$("#playerMessage").text(this.playerStates[state].message);
 
 					return;
 				},
@@ -289,6 +330,8 @@
 				},
 				placePill: function(slot)
 				{
+					if (this.playerStatus != "ill") return;
+					
 					if (this.pill_selected == -1)
 					{
 						if (slot == "left" && this.pills_left.length > 0) 
@@ -372,7 +415,7 @@
 
 			<div id="scaleContainer">
 				<div class="pnlScale">&#x2696;</div>
-				<div>Times Used: <span id="pnlTimesUsed">0</span></div>
+				<div>Times Used: <span id="pnlTimesUsed"></span></div>
 				<div><button id="btnWeigh" onclick="pillgame.weigh()">WEIGH</button></div>
 			</div>
 
@@ -405,7 +448,9 @@
 				<div class="pillSlot"></div>
 			</div>
 			<br />
-			<div id="playerContainer" onclick="pillgame.placePill('mouth')"></div>
+			<div id="playerFace" onclick="pillgame.placePill('mouth')"></div>
+			<br />
+			<div id="playerMessage"></div>
 		</div>
 
 		<br />
@@ -413,7 +458,7 @@
 		<div id="bottomContainer">
 			<p>You are slowly dying. There are eight pills. One of them is the cure. The rest are lethal poison and will kill you instantly. They are all identical in size and shape, and color. However, the cure is slightly lighter than the rest. You may use the scale exactly two times before it breaks.</p>
 
-			<p>Once you have decided which pill to take, select the pill and click on the face on the right. Good luck!</p>
+			<p>Once you have decided which pill to take, select the pill and click on the face at the bottom. Good luck!</p>
 
 			<button id="btnStart" onclick="pillgame.start()">START</button>
 		</div>
