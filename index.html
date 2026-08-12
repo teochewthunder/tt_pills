@@ -15,7 +15,7 @@
 
 			div {outline: 0px solid red;}
 
-			#topContainer
+			.topContainer
 			{
 				display: grid;
 				grid-template-columns: 1fr 2fr 1fr;
@@ -24,19 +24,19 @@
 				margin: 0 auto 0 auto;
 			}
 
-			#middleContainer
+			.middleContainer
 			{
 				width: 600px;
 				margin: 0 auto 0 auto;
 			}			
 
-			#bottomContainer
+			.bottomContainer
 			{
 				width: 500px;
 				margin: 0 auto 0 auto;
 			}	
 
-			#scaleContainer
+			.scaleContainer
 			{
 			    display: grid;
 			    grid-template-rows: 8fr 1fr 1fr;
@@ -185,12 +185,11 @@
 				pills_left: [],
 				pills_right: [],
 				weighTimes: 0,
-				weighing: false,
 				weigh: function()
 				{
 					if (this.playerStatus != "ill") return;
-
 					this.setWeightTimes(this.weighTimes + 1);  
+
 					const leftWeight = this.pills_left
 				    .map((x) => this.pills[x])
 				    .reduce((sum, weight) => sum + weight, 0);
@@ -222,6 +221,8 @@
 
 				    	return;
 				    }
+
+				    return;
 				},
 				setWeightTimes: function(times)
 				{
@@ -244,10 +245,10 @@
 				{
 					this.setPlayerState("ill");
 					this.setWeightTimes(0);
+
 					$("#btnWeigh").show();
 					$("#btnStart").html("RESTART");
-			    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "center");
-			    	$("#pnlWeighPillsContainerRight").css("justifyContent", "center");
+			    	$(".pnlWeighPillsContainer").css("justifyContent", "center");
 
 					this.pills = [10, 10, 10, 10, 10, 10, 10, 10];
 					this.pills[Math.floor(Math.random() * 8)] = 1;
@@ -368,7 +369,7 @@
 
 					const index = this.pills_middle.indexOf(this.pill_selected);
 
-					if (index !== -1)  this.pills_middle.splice(index, 1);
+					if (index !== -1) this.pills_middle.splice(index, 1);
 
 					this.pill_selected = -1;
 					this.renderPills();
@@ -385,8 +386,7 @@
 				gameOver: function()
 				{
 					$("#btnWeigh").hide();
-			    	$("#pnlWeighPillsContainerLeft").css("justifyContent", "center");
-			    	$("#pnlWeighPillsContainerRight").css("justifyContent", "center");
+			    	$(".pnlWeighPillsContainer").css("justifyContent", "center");
 					this.pills_middle = [];
 					this.pills_left = [];
 					this.pills_right = [];
@@ -399,7 +399,7 @@
 	</head>
 
 	<body>
-		<div id="topContainer">
+		<div class="topContainer">
 			<div id="pnlWeighPillsContainerLeft" class="pnlWeighPillsContainer">
 				<div class="pnlWeighPills" id="pnlWeighPills_left" onclick="pillgame.placePill('left')">
 					<div class="pillSlot"></div>
@@ -414,7 +414,7 @@
 				</div>				
 			</div>
 
-			<div id="scaleContainer">
+			<div class="scaleContainer">
 				<div class="pnlScale">&#x2696;</div>
 				<div>Times Used: <span id="pnlTimesUsed"></span></div>
 				<div><button id="btnWeigh" onclick="pillgame.weigh()">WEIGH</button></div>
@@ -437,7 +437,7 @@
 
 		<br />
 
-		<div id="middleContainer">
+		<div class="middleContainer">
 			<div id="pillsContainer">
 				<div class="pillSlot"></div>
 				<div class="pillSlot"></div>
@@ -456,7 +456,7 @@
 
 		<br />
 
-		<div id="bottomContainer">
+		<div class="bottomContainer">
 			<p>You are slowly dying. There are eight pills. One of them is the cure. The rest are lethal poison and will kill you instantly. They are all identical in size and shape, and color. However, the cure is slightly lighter than the rest. You may use the scale exactly two times before it breaks.</p>
 
 			<p>Once you have decided which pill to take, select the pill and click on the face at the bottom. Good luck!</p>
